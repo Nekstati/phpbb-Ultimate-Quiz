@@ -1,0 +1,50 @@
+.ultimatequiz input[type=number] {
+	max-width: 60px;
+}
+.ultimatequiz textarea {
+	overflow-x: hidden; /* Equalize textarea height in Firefox and Chromoclones */
+}
+.ultimatequiz dl:not(:last-of-type) {
+	padding-bottom: 14px;
+}
+.ultimatequiz form dd,
+.ultimatequiz form dt {
+	margin-top: 5px;
+}
+.ultimatequiz form dt span:last-of-type,
+.ultimatequiz form dd span:last-of-type {
+	display: block;
+	margin-bottom: 5px;
+}
+.ultimatequiz form br.uqm-divider {
+	display: block;
+	margin-bottom: 3px;
+}
+.ultimatequiz dd label {
+	display: inline-block;
+	padding: 2px 0;
+}
+.ultimatequiz h2 + span {
+	font-size: 1.1em;
+	display: block;
+	margin-bottom: 6px;
+}
+.ultimatequiz h2.forum-title {
+	float: left;
+	margin-top: 0.3em;
+}
+.ultimatequiz h2.topic-title {
+	margin-top: 0.5em;
+}
+.ultimatequiz .uqm-play img {
+	max-width: 52%;
+}
+.ultimatequiz .uqm-results img {
+	max-width: 15%;
+}
+.ultimatequiz .uqm-stats img {
+	max-width: 15%;
+}
+.ultimatequiz .uqm-stats .pollbar1 {
+	margin-bottom: 4px;
+}

@@ -1,0 +1,20 @@
+services:
+    nekstati.ultimatequiz.subscriber:
+        class: nekstati\ultimatequiz\event\subscriber
+        arguments:
+            - '@auth'
+            - '@config'
+            - '@dbal.conn'
+            - '@language'
+            - '@controller.helper'
+            - '@request'
+            - '@routing.helper'
+            - '@template'
+            - '@user'
+            - '%core.root_path%'
+            - '%core.table_prefix%'
+        tags:
+            - { name: event.listener }
+
+    nekstati.ultimatequiz.quiz:
+        class: nekstati\ultimatequiz\core\quiz

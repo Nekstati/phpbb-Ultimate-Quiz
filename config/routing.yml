@@ -1,0 +1,4 @@
+nekstati_quiz_index:
+    path: /quiz
+    defaults:
+        _controller: nekstati.ultimatequiz.quiz:__construct

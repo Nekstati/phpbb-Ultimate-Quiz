@@ -1,0 +1,113 @@
+<!-- INCLUDE overall_header.html -->
+
+{% if QUIZ_RESULTS %}
+
+	<h2>{QUIZ_RESULTS}</h2>
+	<span>{QUIZ_SUMMARY}<!-- IF QUIZ_CASH_MESSAGE --> {QUIZ_CASH_MESSAGE}<!-- ENDIF --></span>
+
+	<!-- IF SHOW_ANSWERS -->
+	<div class="panel bg1 uqm-results"><div class="inner">
+			<fieldset>
+
+			<!-- BEGIN result_row -->
+			<dl>
+				<dt>
+					{result_row.QUESTION}
+				</dt>
+				<dd>
+					<strong><span style="color: <!-- IF result_row.IS_CORRECT -->green<!-- ELSE -->red<!-- ENDIF -->"><!-- IF result_row.IS_CORRECT -->{L_UQM_QUIZ_CORRECT}<!-- ELSE -->{L_UQM_QUIZ_INCORRECT}<!-- ENDIF -->:</span></strong> <span>{result_row.MESSAGE}</span>
+				</dd>
+			</dl>
+			<!-- END result_row -->
+
+			<!-- IF GROUP_REWARDS -->
+			<dl>
+				<dt>{GROUP_REWARDS}</dt>
+			</dl>
+			<!-- ENDIF -->
+
+			</fieldset>
+	</div></div>
+	<!-- ELSE -->
+	<br /><br />
+	<!-- ENDIF -->
+
+	{% if QUIZ_CASH_ERROR %}
+		<div class="rules">
+			{{ QUIZ_CASH_ERROR }}
+		</div>
+	{% endif %}
+
+	<div class="action-bar actions-jump">
+		<p class="jumpbox-return" style="margin: 2px 0">
+			<a href="{UQM_URL_INDEX}" class="left-box arrow-left">
+				<i class="icon fa-angle-left fa-fw icon-black" aria-hidden="true"></i><span>{L_UQM_RETURN_TO_INDEX}</span>
+			</a>
+		</p>
+	</div>
+
+{% else %}
+
+	<h2 class="topic-title">
+		{QUIZ_NAME}
+		{% if QUIZ_TIME_LIMIT %}<span style="float: right"><i aria-hidden="true" class="icon fa-clock-o fa-fw" style="font-size: inherit"></i><span id="uqm_timer">0:00</i></span>{% endif %}
+	</h2>
+	<span>{POSTER_INFORMATION}</span>
+
+	<form method="post" action="{URL_SUBMIT_QUIZ}">
+
+		<!-- BEGIN question_row -->
+		<div class="panel bg1 uqm-play"><div class="inner">
+			<fieldset>
+				<dl>
+					<dt>
+						{question_row.QUESTION}
+					</dt>
+					<dd>
+						<!-- BEGIN answer_row -->
+						<label><input type="radio" name="answer_{question_row.QUESTION_ID}" value="{question_row.answer_row.ANSWER_ID}" /> {question_row.answer_row.ANSWER}</label><br />
+						<!-- END answer_row -->
+					</dd>
+				</dl>
+			</fieldset>
+		</div></div>
+		<!-- END question_row -->
+
+		<div class="panel bg3"><div class="inner">
+			<fieldset class="submit-buttons"> 
+				{S_FORM_TOKEN}
+				<input type="submit" name="submit" value="{L_SUBMIT}" title="{L_SUBMIT}" class="button1" id="uqm_submit" />
+			</fieldset>
+		</div></div>
+
+	</form>
+
+	<script>
+	(f => {
+		let seconds, minutes, limit = {QUIZ_TIME_LIMIT};
+		if (!limit) return;
+		update();
+
+		let interval = setInterval(() => {
+			if (minutes == 0 && seconds < 1) {
+				clearInterval(interval);
+				if (confirm('{LA_UQM_TIME_LIMIT_EXCEEDED_REDIRECT}'))
+					window.location = '{URL_QUIZ_INDEX}';
+				return;
+			}
+			limit--;
+			update();
+		}, 1000);
+
+		function update() {
+			seconds = (limit % 60);
+			minutes = (limit - seconds) / 60;
+			document.getElementById('uqm_submit').value = minutes + ':' + (seconds <= 9 ? '0' + seconds : seconds);
+			document.getElementById('uqm_timer').innerHTML = minutes + ':' + (seconds <= 9 ? '0' + seconds : seconds);
+		}
+	})();
+	</script>
+
+{% endif %}
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,79 @@
+<!-- INCLUDE overall_header.html --> 
+ 
+<script>
+	function toggle_group_rewards(disabled_setting) {
+		document.getElementById('quiz_category_form').group_rewards_group_id.disabled = disabled_setting;
+		document.getElementById('quiz_category_form').group_rewards_percentage.disabled = disabled_setting;
+	}
+</script>
+
+<form id="quiz_category_form" method="post" action="{URL_FORM_ACTION}">
+	<h1>{{ lang(EDIT_MODE ? 'ACP_UQM_CATEGORY_EDIT' : 'ACP_UQM_CATEGORY_ADD') }}</h1>
+	
+	<fieldset>
+	<legend>{L_ACP_UQM_CATEGORY_INFO}</legend>
+		<dl>
+			<dt><label>{L_ACP_UQM_CATEGORY_NAME}</label>
+			<br /><span>{L_ACP_UQM_CATEGORY_NAME_EXPLAIN}</span></dt>
+			<dd><input type="text" name="category_name" value="{CATEGORY_NAME}" maxlength="255" style="width: 90%" /></dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_UQM_CATEGORY_DESCRIPTION}</label>
+			<br /><span>{L_ACP_UQM_CATEGORY_DESCRIPTION_EXPLAIN}</span></dt>
+			<dd><textarea name="category_description" maxlength="255">{CATEGORY_DESCRIPTION}</textarea></dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{L_ACP_UQM_CATEGORY_GROUP_REWARDS}</legend>
+
+		<dl>
+			<dt>
+				<label>{L_ACP_UQM_CATEGORY_GROUP_REWARDS}</label><br />
+				<span>{L_ACP_UQM_CATEGORY_GROUP_REWARDS_EXPLAIN}</span>
+			</dt>
+
+			<dd>
+				<label><input type="radio" name="group_rewards_enabled" value="1" onclick="toggle_group_rewards(false)" <!-- IF GROUP_REWARDS -->checked<!-- ENDIF -->/> {L_YES}</label>
+				<label><input type="radio" name="group_rewards_enabled" value="0" onclick="toggle_group_rewards(true)" <!-- IF GROUP_REWARDS != 1-->checked<!-- ENDIF --> /> {L_NO}</label>
+			</dd>	
+		</dl>		
+
+		<dl>
+			<dt>
+				<label>{L_ACP_UQM_CATEGORY_GROUP_REWARDS_PERCENTAGE}</label><br />
+				<span>{L_ACP_UQM_CATEGORY_GROUP_REWARDS_PERCENTAGE_EXPLAIN}</span>
+			</dt>
+			
+			<dd>
+				<input type="number" name="group_rewards_percentage" value="{GROUP_PERCENTAGE}" size="3" min="0" max="100" <!-- IF GROUP_REWARDS != 1 -->disabled="false"<!-- ENDIF --> /> %
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>
+				<label>{L_ACP_UQM_CATEGORY_GROUP_REWARDS_GROUP}</label><br /> 
+				<span>{L_ACP_UQM_CATEGORY_GROUP_REWARDS_GROUP_EXPLAIN}</span>	
+					<dd>
+						{GROUP_LIST}
+					</dd>
+				</dl>		
+			</dd>
+		</dl>
+	</fieldset>
+    
+    <fieldset>
+    	<legend>{L_ACP_UQM_CATEGORY_GROUP_PERMISSIONS}</legend>
+        <dl>
+        	<dt><label for="permitted_groups">{L_ACP_UQM_CATEGORY_GROUP_PERMISSIONS_GROUP}</label><br /><span>{L_ACP_UQM_CATEGORY_GROUP_PERMISSIONS_GROUP_EXPLAIN}</span></dt>
+            <dd><select name="permitted_groups[]" id="permitted_groups" multiple="multiple">{MULTI_GROUP_LIST}</select></dd>
+        </dl>
+    </fieldset>
+
+	<p class="quick">
+		{S_FORM_TOKEN}
+		<input class="button1" type="submit" name="submit" value="{L_SUBMIT}" />
+	</p>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

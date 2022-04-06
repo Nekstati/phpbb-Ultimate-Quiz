@@ -1,0 +1,47 @@
+<!-- INCLUDE overall_header.html -->
+
+<form method="post" action="{URL_FORM_ACTION}">
+	<h1>{L_ACP_UQM_QUIZ_SETTINGS}</h1>
+
+	<fieldset>
+		<legend>{L_ACP_UQM_QUIZ_CATEGORIES}</legend>
+
+		<!-- BEGIN category_row -->
+		<dl>
+			<dt><label>{category_row.CATEGORY_NAME}</label></dt>
+			<dd><a href="{category_row.EDIT_LINK}">{L_ACP_UQM_EDIT_CATEGORY}</a> | <a href="{category_row.DELETE_LINK}">{L_ACP_UQM_DELETE_CATEGORY}</a></dd>
+		</dl>
+		<!-- END category_row -->
+
+		<dl>
+			<dt>&nbsp;</dt>
+			<dd>{ADD_CATEGORY_LINK}</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset>
+		<legend>{L_ACP_UQM_QUIZ_CONFIGURATION}</legend>
+
+		<!-- BEGIN configuration_row -->
+		<dl>
+			<dt><label>{configuration_row.LANG}</label><br /><span>{configuration_row.LANG_EXPLAIN}</span></dt>
+			<dd>
+				<!-- IF configuration_row.TYPE eq 'radio' -->
+					<label><input type="radio" name="{configuration_row.NAME}" value="1" <!-- IF configuration_row.VALUE -->checked <!-- ENDIF -->/> {L_YES}</label>
+					<label><input type="radio" name="{configuration_row.NAME}" value="0" <!-- IF not configuration_row.VALUE -->checked <!-- ENDIF -->/> {L_NO}</label>
+				<!-- ELSEIF configuration_row.TYPE eq 'number' -->
+					<input type="number" name="{configuration_row.NAME}" value="{configuration_row.VALUE}" min="0" />
+				<!-- ELSE -->
+					<input type="text" name="{configuration_row.NAME}" value="{configuration_row.VALUE}" />
+				<!-- ENDIF -->
+			</dd>
+		</dl>
+		<!-- END configuration_row -->
+
+		<p class="quick">
+			<input class="button1" type="submit" name="submit" value="{L_SUBMIT}" />
+		</p>
+	</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

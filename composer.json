@@ -1,0 +1,32 @@
+{
+    "name": "nekstati/ultimatequiz",
+    "type": "phpbb-extension",
+    "description": "Quiz system for phpBB. Allows users and administrators to create and play quizzes. Ported from Ultimate Quiz MOD v2.1.2.",
+    "homepage": "",
+    "version": "1.0.0",
+    "time": "2022-04-01",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "battye",
+            "email": "",
+            "homepage": "http://www.cricketmx.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "Nekstati",
+            "email": "",
+            "homepage": "http://phpbbguru.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "extra": {
+        "display-name": "💡 Ultimate Quiz",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.3.0"
+        }
+    }
+}

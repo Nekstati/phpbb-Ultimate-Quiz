@@ -1,0 +1,111 @@
+<!-- INCLUDE overall_header.html -->
+
+<h2 class="forum-title">{L_UQM_QUIZ_STATS} / {QUIZ_NAME}</h2>
+
+<!-- IF AVERAGE_SCORES -->
+<div class="forumbg forumbg-table uqm-stats"><div class="inner">
+	<table class="table1" cellspacing="1">
+		<thead>
+			<tr>
+				<th width="20%" align="left">{L_UQM_QUIZ_NAME}</th>
+				<th width="10%">{L_UQM_STATS_TIMES_PLAYED}</th>
+				<th width="10%">{L_UQM_STATS_QUESTIONS}</th>
+				<th width="10%">{L_UQM_STATS_CORRECT_ANSWERS}</th>
+				<th width="10%">{L_UQM_STATS_INCORRECT_ANSWERS}</th>
+				<th width="10%">{L_UQM_STATS_CORRECT_PERCENT}</th>
+				<th width="10%">{L_UQM_STATS_INCORRECT_PERCENT}</th>
+				<th width="20%">{L_UQM_STATS_AVERAGE_SCORE}</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr class="bg1">
+				<td align="left">{QUIZ_NAME}</td>
+				<td align="center">{TIMES_PLAYED}</td>
+				<td align="center">{NUMBER_OF_QUESTIONS}</td>
+				<td align="center">{CORRECT_ANSWERS}</td>
+				<td align="center">{INCORRECT_ANSWERS}</td>
+				<td align="center">{CORRECT_PERCENT}%</td>
+				<td align="center">{INCORRECT_PERCENT}%</td>
+				<td align="center">{AVERAGE_SCORE}/{NUMBER_OF_QUESTIONS}</td>
+			</tr>
+		</tbody>
+	</table>
+</div></div>
+<!-- ENDIF -->
+
+
+<!-- IF QUESTION_SUMMARY -->
+<div class="forumbg forumbg-table uqm-stats"><div class="inner">
+	<table class="table1" cellspacing="1">
+		<thead>
+			<tr>
+				<th width="30%" align="left">{L_UQM_STATS_QUESTION}</th>
+				<th width="20%">{L_UQM_STATS_CORRECT_ANSWERS}</th>
+				<th width="20%">{L_UQM_STATS_INCORRECT_ANSWERS}</th>
+				<th width="30%">{L_UQM_STATS_CORRECT_PERCENT}</th>
+			</tr>
+		</thead>
+
+		<!-- BEGIN question_summary_row -->
+		<tbody>
+			<tr class="bg1">
+				<td align="left">{question_summary_row.QUESTION}</td>
+				<td align="center">{question_summary_row.CORRECT}</td>
+				<td align="center">{question_summary_row.INCORRECT}</td>
+				<td align="center">{question_summary_row.PERCENT}%</td>
+			</tr>
+		</tbody>
+		<!-- BEGINELSE -->
+		<tbody>
+			<tr class="bg1">
+				<td colspan="4" align="center">{L_UQM_STATS_NO_ENTRIES}</td>
+			</tr>
+		</tbody>
+		<!-- END question_summary_row -->
+
+	</table>
+</div></div>
+<!-- ENDIF -->
+
+
+<!-- IF SURVEY -->
+<div class="forumbg forumbg-table uqm-stats"><div class="inner">
+	<table class="table1" cellspacing="1">
+		<thead>
+			<tr>
+				<th width="30%" align="left">{L_UQM_STATS_QUESTION}</th>
+				<th width="70%">{L_UQM_STATS_ANSWER}</th>
+			</tr>
+		</thead>
+
+		<!-- BEGIN question_row -->
+		<tbody>
+			<tr class="bg1">
+				<td align="left">{question_row.QUESTION_NAME}</td>
+				<td align="left">
+
+				<!-- BEGIN answer_row -->
+				<div class="pollbar1" style="width:{question_row.answer_row.ANSWER_SELECTED}%;">
+					<span style="color: white">
+						<strong>&nbsp;{question_row.answer_row.ANSWER_NAME} ({question_row.answer_row.ANSWER_SELECTED}%)</strong>
+					</span>
+				</div>
+				<!-- END answer_row -->
+
+				</td>
+			</tr>
+		</tbody>
+		<!-- BEGINELSE -->
+		<tbody>
+			<tr class="bg1">
+				<td colspan="4" align="center">{L_UQM_STATS_NO_ENTRIES}</td>
+			</tr>
+		</tbody>
+		<!-- END question_row -->
+
+	</table>
+</div></div>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->

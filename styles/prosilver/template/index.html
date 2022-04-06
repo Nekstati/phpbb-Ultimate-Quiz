@@ -1,0 +1,73 @@
+<!-- INCLUDE overall_header.html -->
+
+<h2 class="forum-title">{L_UQM_QUIZZES}</h2>
+
+<div class="action-bar bar-top" style="float: right; padding: 3px 0 3px 0;">
+<!-- IF URL_ADD_QUIZ and not S_IS_BOT -->
+	<a href="{URL_ADD_QUIZ}" class="button" title="{L_UQM_BUTTON_QUIZ_NEW}">
+		<span>{L_UQM_BUTTON_QUIZ_NEW}</span> <i class="icon fa-pencil fa-fw" aria-hidden="true"></i>
+	</a>
+<!-- ENDIF -->
+</div>
+
+<!-- BEGIN category_row -->
+<div class="{{ category_row.IS_RECENTS ? 'forabg' : 'forumbg' }} forumbg-table"><div class="inner">
+	<table class="table1" cellspacing="1">
+		<thead>
+			<tr>
+				<th width="100%" align="left" colspan="4"><!-- IF category_row.IS_RECENTS -->{category_row.NAME}<!-- ELSE --><a href="{category_row.URL}">{category_row.NAME}</a><!-- ENDIF --></th>
+			</tr>
+		</thead>
+
+		<tbody>
+
+		<!-- IF category_row.DESCRIPTION -->
+			<tr class="bg3">
+				<td width="100%" colspan="4" align="left">{category_row.DESCRIPTION}</td>
+			</tr>
+		<!-- ENDIF -->
+
+		<!-- IF category_row.IS_EMPTY -->
+			<tr class="bg1">
+				<td width="100%" colspan="4" align="center">
+					{% if URL_ADD_QUIZ && !S_IS_BOT %}
+						<a href="{category_row.URL_ADD_QUIZ}">{L_UQM_QUIZZES_NO_ENTRIES}</a>
+					{% else %}
+						{L_UQM_CATEGORY_NO_QUIZZES}
+					{% endif %}
+				</td>
+			</tr>
+		<!-- ELSE -->
+		<!-- BEGIN quiz_row -->
+			<tr class="bg1">
+				<td width="35%"><a class="topictitle" href="{category_row.quiz_row.URL}">{category_row.quiz_row.NAME}</a></td>
+				<td width="25%">{category_row.quiz_row.AUTHOR}</td>
+				<td width="20%">{category_row.quiz_row.DATE}</td>
+				<td width="20%">{category_row.quiz_row.EXTRA_LINKS}</td>
+			</tr>
+		<!-- END quiz_row -->
+		<!-- ENDIF -->
+
+		<!-- IF IS_INDEX_VIEW and not category_row.IS_RECENTS and not category_row.IS_EMPTY -->
+			<tr class="bg3">
+				<td width="100%" colspan="4" align="left">{category_row.VIEW_ALL}</td>
+			</tr>
+		<!-- ENDIF -->
+
+		</tbody>
+	</table>
+</div></div>
+<!-- END category_row -->
+
+<div class="action-bar bar-bottom">
+<!-- IF .pagination or TOTAL_POSTS -->
+	<div class="pagination">
+		{TOTAL_POSTS}
+		<!-- IF .pagination -->
+			<!-- INCLUDE pagination.html -->
+		<!-- ENDIF -->
+	</div>
+<!-- ENDIF -->
+</div>
+
+<!-- INCLUDE overall_footer.html -->

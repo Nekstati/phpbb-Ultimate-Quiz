@@ -1,0 +1,76 @@
+<!-- INCLUDE overall_header.html -->
+
+<form method="post" action="{URL_SUBMIT_QUIZ}">
+
+<!-- IF ERROR_MESSAGE -->
+	<div class="rules"><div class="inner">
+		<span>{ERROR_MESSAGE}</span>
+	</div></div>
+<!-- ENDIF -->
+
+<div class="panel"><div class="inner">
+	<h3>{L_UQM_QUIZ_ADD}</h3>
+	<fieldset>
+
+	<!-- IF IS_SUBMITTED -->
+		<dl>
+			<dt><span><strong>{L_UQM_ENTER_QUIZ_NAME}</strong></span></dt>
+			<dd><input type="text" class="inputbox" name="quiz_name" maxlength="255" value="{QUIZ_NAME}" /></dd>
+		</dl>
+		<dl>
+			<dt><span><strong>{L_UQM_ENTER_QUIZ_CATEGORY}</strong></span></dt>
+			<dd><select name="category" class="inputbox">{QUIZ_CATEGORY_SELECT_OPTS}</select></dd>
+		</dl>
+
+		<!-- IF IS_TIME_LIMITS_ENABLED -->
+			<dl>
+				<dt><span><strong>{L_UQM_ENTER_TIME_LIMIT}</strong></span></dt>
+				<dd>
+					<input class="inputbox autowidth" name="time_limit_minutes" type="number" min="0" max="60" value="{MINUTES_SELECTION}" /> {L_UQM_TIME_LIMIT_MINUTES} &nbsp;&nbsp;&nbsp;
+					<input class="inputbox autowidth" name="time_limit_seconds" type="number" min="0" max="59" value="{SECONDS_SELECTION}" /> {L_UQM_TIME_LIMIT_SECONDS}
+				</dd>
+			</dl>
+		<!-- ENDIF -->
+	<!-- ENDIF -->
+
+	<!-- BEGIN question_row -->
+		<dl>
+			<dt>
+				<span><strong>{L_UQM_ENTER_QUESTION} {L_UQM_NUMBER_SIGN}{{ loop.index }}</strong></span>
+				{% if loop.first %}<br /><span>{L_UQM_ENTER_QUESTION_EXPLAIN}</span>{% endif %}
+				<textarea class="inputbox" maxlength="16384" cols="45" rows="3" name="question_name_{question_row.QUESTION_ID}">{question_row.QUESTION}</textarea>
+			</dt>
+			<dd>
+				<!-- IF IS_SUBMITTED -->
+					<span><strong>{L_UQM_SELECT_ANSWERS}</strong></span>
+					{% if loop.first %}<br /><span>{L_UQM_SELECT_ANSWERS_EXPLAIN}</span>{% endif %}
+					<!-- BEGIN answer_row -->
+						<label><input type="radio" class="radio" name="answer_{question_row.QUESTION_ID}" value="{question_row.answer_row.ANSWER_ID}" /> {question_row.answer_row.ANSWER}</label><br />
+						<input type="hidden" name="answers_{question_row.QUESTION_ID}" value="{question_row.ANSWERS}" />
+					<!-- END answer_row -->
+				<!-- ELSE -->
+					<span><strong>{L_UQM_ENTER_ANSWERS}</strong></span>
+					{% if loop.first %}<br /><span>{UQM_ENTER_ANSWERS_EXPLAIN}</span>{% endif %}
+					<textarea class="inputbox" maxlength="16384" cols="20" rows="3" name="answers_{question_row.QUESTION_ID}">{question_row.ANSWERS}</textarea>
+				<!-- ENDIF -->
+			</dd>
+		</dl>
+	<!-- END question_row -->
+
+	</fieldset>
+</div></div>
+
+<div class="panel bg3"><div class="inner">
+	<fieldset class="submit-buttons"> 
+		{HIDDEN_FIELDS}
+		{S_FORM_TOKEN}
+		<!-- IF SHOW_ADD_BUTTON --><input type="submit" name="alter_question" value="{L_UQM_PLUS_QUESTION}" class="button2" /> &nbsp; <!-- ENDIF -->
+		<!-- IF SHOW_REMOVE_BUTTON --><input type="submit" name="alter_question" value="{L_UQM_MINUS_QUESTION}" class="button2" /> &nbsp; <!-- ENDIF -->
+		<!-- IF IS_SUBMITTED --><input type="submit" name="alter_question" value="{L_UQM_GO_BACK}" class="button2" /> &nbsp; <!-- ENDIF -->
+		<input type="submit" name="submit" value="{{ lang(IS_SUBMITTED ? 'SUBMIT' : 'UQM_NEXT_STEP') }}" class="button1" />
+	</fieldset>
+</div></div>
+
+</form>
+
+<!-- INCLUDE overall_footer.html -->
