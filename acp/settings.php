@@ -37,7 +37,7 @@ class settings
 				if (isset($_POST['submit']))
 				{
 					// Values to update, which we'll pass by reference to the validation checking function.
-					$category_name = request_var('category_name', '');
+					$category_name = request_var('category_name', '', true);
 					$group_rewards_destination_group_id = 0;
 					$group_rewards_percentage = 0;
 
@@ -53,7 +53,7 @@ class settings
 						$category_id
 					);
 
-					$category_description = request_var('category_description', '');
+					$category_description = request_var('category_description', '', true);
 
 					$category_array = array(
 						'quiz_category_name'			=> utf8_normalize_nfc($category_name),
@@ -115,7 +115,7 @@ class settings
 					// The values we'll be inserting. We'll pass these by reference to the validation function
 					// so that they can be assigned values or updated if necessary. For example, there is no need to
 					// update the group rewards variables unless the admin has enabled that for this category.
-					$category_name = request_var('category_name', '');
+					$category_name = request_var('category_name', '', true);
 					$group_rewards_destination_group_id = 0;
 					$group_rewards_percentage = 0;
 
@@ -130,7 +130,7 @@ class settings
 						$add_category_link
 					);
 
-					$category_description = request_var('category_description', '');
+					$category_description = request_var('category_description', '', true);
 
 					$category_array = array(
 						'quiz_category_name'			=> utf8_normalize_nfc($category_name),
